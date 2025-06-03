@@ -1,1149 +1,308 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FATALITY SHOP - A Loja Definitiva para Gamers</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>Vozes Verbais: Aprenda e Pratique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        :root {
-            --blood-red: #d10000;
-            --dark-red: #8b0000;
-            --gold: #ffd700;
-            --dark-bg: #0a0a0a;
-            --neon-green: #0ddc17;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         body {
-            font-family: 'Bahnschrift', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--dark-bg);
-            background-image: radial-gradient(circle, #1a1a1a 1px, transparent 1px);
-            background-size: 20px 20px;
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            font-family: 'Inter', sans-serif;
         }
-        header {
-            background: linear-gradient(to right, #000, var(--dark-red));
-            padding: 15px 0;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            position: relative;
-            border-bottom: 3px solid var(--gold);
-        }
-        header .logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-        header .logo img {
-            width: 240px;
-            filter: drop-shadow(0 0 5px var(--blood-red));
-        }
-        header h1 {
-            font-size: 2.8em;
-            color: #fff;
-            text-shadow: 2px 2px 0px var(--blood-red),
-                         4px 4px 0px rgba(0,0,0,0.5);
-            letter-spacing: 2px;
-            font-family: 'Arial Black', sans-serif;
-        }
-        .slogan {
-            color: var(--neon-green);
-            font-size: 1.2em;
-            text-shadow: 0 0 5px var(--neon-green);
-            margin-top: 5px;
-            letter-spacing: 1px;
-        }
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-        nav ul li { position: relative; }
-        nav a {
+        .tab-button.active {
+            background-color: #0369a1;
             color: white;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1em;
-            padding: 8px 15px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
-        nav a:hover {
-            background-color: var(--blood-red);
-            color: #fff;
-            box-shadow: 0 0 15px var(--blood-red);
-            transform: translateY(-2px);
-        }
-        .submenu {
-            opacity: 0;
-            visibility: hidden;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: #222;
-            padding: 0;
-            border-radius: 0 0 5px 5px;
-            min-width: 160px;
-            z-index: 100;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            border-top: 3px solid var(--blood-red);
-            font-size: 1em;
-            transition: opacity 0.2s ease, visibility 0.2s ease;
-        }
-        .submenu li { width: 100%; margin: 0; }
-        .submenu a {
-            display: block;
-            padding: 5px 10px;
-            color: #ddd;
-            transition: background-color 0.15s;
-        }
-        .submenu a:hover {
-            background-color: var(--dark-red);
-            color: #fff;
-        }
-        nav ul li:hover .submenu,
-        .submenu:hover {
-            opacity: 1;
-            visibility: visible;
-        }
-        .container {
-            max-width: 1600px;
-            margin: 30px auto;
-            padding: 0 20px;
-            flex: 1;
-        }
-        .section-title {
-            font-size: 2.5em;
-            text-align: center;
-            margin: 40px 0 20px 0;
-            color: var(--neon-green);
-            text-shadow: 0 0 10px var(--neon-green);
-            position: relative;
-            letter-spacing: 2px;
-        }
-        .section-title:after {
-            content: "";
-            display: block;
-            width: 100px;
-            height: 3px;
-            background: var(--blood-red);
-            margin: 15px auto;
-        }
-        /* CAROUSEL */
-        #carousel-outer {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto 40px auto;
-            background: #181c23;
-            border-radius: 24px;
-            box-shadow: 0 6px 32px 0 rgba(0,0,0,0.6);
-            padding: 0;
-            max-width: 1240px;
-            min-height: 480px;
-            position: relative;
-        }
-        #carousel-container {
-            width: 100%;
-            position: relative;
-            min-height: 420px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .carousel-slide {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 370px;
-        }
-        .carousel-controls {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 18px;
-            width: 100%;
-            z-index: 10;
-            pointer-events: none;
-        }
-        .carousel-arrow {
-            background: #232834;
-            border: none;
-            border-radius: 50%;
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 1.5em;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-            transition: background 0.2s, transform 0.2s;
-            margin: 0 12px;
-            cursor: pointer;
-            outline: none;
-            pointer-events: auto;
-        }
-        .carousel-arrow:hover {
-            background: #181c23;
-            transform: scale(1.08);
-        }
-        .carousel-arrow i {
-            color: #fff;
-            font-size: 1.2em;
-            margin: 0;
-            padding: 0;
-        }
-        #carousel-dots {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin: 0 10px;
-        }
-        .carousel-dot {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            border: none;
-            background: #444;
-            margin: 0 2px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .carousel-dot.active {
-            background: var(--blood-red);
-        }
-        /* GAMES GRID */
-        .games-grid, .consoles-grid, .accessories-grid {
-            display: flex;
-            gap: 32px;
-            overflow-x: auto;
-            padding-bottom: 10px;
-            margin-bottom: 30px;
-            scrollbar-width: thin;
-            scrollbar-color: var(--blood-red) #222;
-        }
-        .games-grid::-webkit-scrollbar,
-        .consoles-grid::-webkit-scrollbar,
-        .accessories-grid::-webkit-scrollbar {
-            height: 8px;
-            background: #222;
-        }
-        .games-grid::-webkit-scrollbar-thumb,
-        .consoles-grid::-webkit-scrollbar-thumb,
-        .accessories-grid::-webkit-scrollbar-thumb {
-            background: var(--blood-red);
-            border-radius: 8px;
-        }
-        .game-card, .console-card, .accessory-card {
-            background-color: #181818;
-            border-radius: 12px;
+        .accordion-content {
+            max-height: 0;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            border: 1px solid #333;
-            min-width: 340px;
-            max-width: 340px;
+            transition: max-height 0.3s ease-out;
         }
-        .game-card:hover, .console-card:hover, .accessory-card:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 10px 25px var(--blood-red);
-            border-color: var(--blood-red);
+        .accordion-button.open + .accordion-content {
+            max-height: 500px;
         }
-        .game-card img, .console-card img, .accessory-card img {
-            width: 100%;
-            height: 210px;
-            object-fit: cover;
-            border-bottom: 2px solid #2c2c2c;
-            background: #222;
+        .quiz-option:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
         }
-        .game-info, .console-info, .accessory-info {
-            padding: 18px 18px 30px 18px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
+        .correct-answer {
+            background-color: #10b981 !important;
+            color: white !important;
+            border-color: #059669 !important;
         }
-        .game-info h2, .console-info h2, .accessory-info h2 {
-            font-size: 1.3em;
-            margin-bottom: 10px;
-            color: #fff;
-            font-weight: bold;
-            letter-spacing: 1px;
+        .wrong-answer {
+            background-color: #ef4444 !important;
+            color: white !important;
+            border-color: #dc2626 !important;
         }
-        .price {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: var(--neon-green);
-            text-shadow: 0 0 5px var(--neon-green);
-        }
-        .price .old-price {
-            font-size: 0.9rem;
-            color: #888;
-            text-decoration: line-through;
-            margin-left: 6px;
-        }
-        .botao-container {
-            position: absolute;
-            bottom: 18px;
-            right: 18px;
-        }
-        .botao {
-            display: inline-block;
-            padding: 8px 15px;
-            background: linear-gradient(to bottom, var(--blood-red), var(--dark-red));
-            color: white;
-            text-align: center;
-            border-radius: 5px;
-            cursor: pointer;
-            user-select: none;
-            border: none;
-            font-size: 1em;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s;
-        }
-        .botao:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px var(--blood-red);
-        }
-        .toggle { display: none; }
-        .toggle:checked + .botao {
-            background: linear-gradient(to bottom, var(--neon-green), #0a8a11);
-        }
-        .toggle + .botao::after { content: "Adicionar"; }
-        .toggle:checked + .botao::after { content: "Adicionado ✓"; }
-        /* BADGES */
-        .console-badge, .accessory-badge {
-            position: absolute;
-            top: 14px;
-            left: 14px;
-            background: var(--blood-red);
-            color: #fff;
-            font-size: 0.95em;
-            font-weight: bold;
-            padding: 5px 14px;
-            border-radius: 6px;
-            z-index: 2;
-            letter-spacing: 1px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            text-transform: uppercase;
-        }
-        .accessory-badge { background: var(--dark-red); }
-        #cart-icon {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            font-size: 24px;
-            cursor: pointer;
-            color: white;
-            transition: all 0.3s;
-        }
-        #cart-icon:hover {
-            color: var(--neon-green);
-            transform: scale(1.1);
-        }
-        #cart-count {
-            background: #fff;
-            color: var(--blood-red);
-            border-radius: 50%;
-            padding: 2px 8px;
-            font-size: 14px;
-            margin-left: 5px;
-            font-weight: bold;
-        }
-        #cart-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        #cart-modal > div {
-            background: #1a1a1a;
-            color: #fff;
-            padding: 25px;
-            max-width: 600px;
-            width: 90%;
-            border-radius: 10px;
-            position: relative;
-            border: 2px solid var(--blood-red);
-            box-shadow: 0 0 30px var(--blood-red);
-        }
-        #cart-items {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-        #cart-items li {
-            padding: 10px;
-            border-bottom: 1px solid #333;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        #cart-items li:last-child {
-            border-bottom: none;
-        }
-        .cart-total {
-            font-size: 1.3em;
-            font-weight: bold;
-            color: var(--neon-green);
-            text-align: right;
-            margin-top: 20px;
-        }
-        .cart-buttons {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        .cart-buttons button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-        .cart-buttons button:hover {
-            transform: translateY(-2px);
-        }
-        .close-cart {
-            background: #333;
-            color: white;
-        }
-        .checkout {
-            background: linear-gradient(to bottom, var(--blood-red), var(--dark-red));
-            color: white;
-        }
-        footer {
-            background: linear-gradient(to right, #000, #222);
-            color: white;
-            padding: 30px 0;
-            text-align: center;
-            margin-top: 50px;
-            border-top: 3px solid var(--blood-red);
-        }
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            padding: 0 20px;
-        }
-        .footer-section h3 {
-            color: var(--neon-green);
-            margin-bottom: 15px;
-            font-size: 1.3em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .footer-section p {
-            margin-bottom: 10px;
-            color: #ccc;
-        }
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 15px;
-        }
-        .social-icons a {
-            color: white;
-            font-size: 1.5em;
-            transition: all 0.3s;
-        }
-        .social-icons a:hover {
-            color: var(--neon-green);
-            transform: scale(1.2);
-        }
-        .copyright {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #333;
-            color: #888;
-            font-size: 0.9em;
-        }
-        @media (max-width: 1200px) {
-            #carousel-outer { max-width: 98vw; }
-            .games-grid, .consoles-grid, .accessories-grid { gap: 18px; }
-            .game-card, .console-card, .accessory-card { min-width: 270px; max-width: 270px; }
-        }
-        @media (max-width: 900px) {
-            .games-grid, .consoles-grid, .accessories-grid, .support-container {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 15px;
-  }
-        }
-        @media (max-width: 768px) {
-            header h1 { font-size: 2em; }
-            .section-title { font-size: 2em; }
-            .games-grid, .consoles-grid, .accessories-grid, .support-container {
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-            .game-card img, .console-card img, .accessory-card img { height: 150px; }
-            #cart-icon { top: 20px; right: 20px; }
-            nav ul { gap: 10px; }
-            .submenu {
-                position: static;
-                display: none;
-                width: 100%;
-                box-shadow: none;
-                border-radius: 0;
-            }
-            nav ul li:hover .submenu {
-                display: block;
-                position: static;
-            }
-        }
-        @media (max-width: 600px) {
-  header .logo img {
-    width: 100px;
-  }
-  header h1 {
-    font-size: 1.1em;
-  }
-  .slogan {
-    font-size: 0.9em;
-  }
-  nav ul {
-    flex-direction: column;
-    gap: 0;
-    margin-top: 10px;
-  }
-  nav ul li {
-    width: 100%;
-    text-align: center;
-  }
-  .submenu {
-    min-width: 100vw;
-    font-size: 1em;
-    border-radius: 0;
-    left: 0;
-    right: 0;
-  }
-  .container, .inner {
-    padding: 0 5px;
-    margin: 10px 0;
-    max-width: 100vw;
-  }
-  .section-title {
-    font-size: 1.1em;
-    margin: 20px 0 10px 0;
-  }
-  .games-grid, .consoles-grid, .accessories-grid, .support-container {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 10px !important;
-    overflow-x: unset !important;
-  }
-  .game-card, .console-card, .accessory-card, .faq-section, .contact-section {
-    min-width: unset !important;
-    max-width: 100vw !important;
-    width: 100% !important;
-    margin: 0 auto !important;
-    border-radius: 8px !important;
-  }
-  .game-card img, .console-card img, .accessory-card img {
-    height: 100px !important;
-    object-fit: cover;
-  }
-  .botao, .submit-btn {
-    width: 100%;
-    font-size: 1em;
-    padding: 12px 0;
-  }
-  #cart-modal > div {
-    max-width: 98vw;
-    padding: 10px;
-  }
-  #cart-icon {
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-  }
-  .footer-content {
-    grid-template-columns: 1fr !important;
-    gap: 10px !important;
-    padding: 0 5px;
-  }
-  .footer-section h3 {
-    font-size: 1em;
-  }
-  .footer-section p, .copyright {
-    font-size: 0.9em;
-  }
-}
-
-html, body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
     </style>
+    <!-- Chosen Palette: Warm Neutrals with Sky Blue accent -->
+    <!-- Application Structure Plan: A two-section single-page application. The first section, 'Aprender', uses an accordion layout to present the grammatical explanations in a digestible, non-linear way, allowing users to focus on one concept at a time. The second section, 'Praticar', is an interactive quiz that presents one question at a time, provides immediate feedback, and tracks the score. This structure separates study from practice, a proven pedagogical approach, making the learning process more engaging and effective than a static document. Navigation between sections is handled by two main buttons, providing a clear user flow. -->
+    <!-- Visualization & Content Choices: Report Info: Grammatical rules and examples -> Goal: Inform/Organize -> Viz/Presentation: Accordion layout for the 'Aprender' section. Interaction: Click to expand/collapse. Justification: Organizes complex information into manageable, user-controlled chunks, improving readability and reducing cognitive load. Report Info: Exercise questions and answers -> Goal: Test knowledge/Compare -> Viz/Presentation: Interactive quiz interface. Interaction: Clickable answer buttons, immediate visual feedback (color change), display of correct answer and explanation, score tracking. Justification: Actively engages the user, reinforces learning through instant feedback, and gamifies the experience with a final score, increasing motivation. Library/Method: All interactions and layouts are built with Vanilla JS and Tailwind CSS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
-<body>
-    <header>
-        <div class="logo">
-            <img src="images/logoprincipal.png" alt="FATALITY SHOP Logo">
-            <h1>FATALITY SHOP</h1>
-            <p class="slogan">WHERE GAMERS MEET THEIR DESTINY</p>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="./index.html">Início</a></li>
-                <li>
-                    <a href="#">Jogos</a>
-                    <ul class="submenu">
-                        <li><a href="./indexXbox.html">Xbox</a></li>
-                        <li><a href="./indexplaystation.html">PlayStation</a></li>
-                        <li><a href="./indexnintendo.html">Nintendo</a></li>
-                    </ul>
-                </li>
-                <li><a href="./console.html">Consoles</a></li>
-                <li><a href="./acessorios.html">Acessórios</a></li>
-                <li><a href="./indexsuporte.html">Suporte</a></li>
-            </ul>
+<body class="bg-stone-100 text-slate-800">
+
+    <div class="container mx-auto max-w-4xl p-4 sm:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-sky-800">Vozes Verbais: Aprenda e Pratique</h1>
+            <p class="text-slate-600 mt-2">Uma ferramenta interativa para dominar a gramática portuguesa.</p>
+        </header>
+
+        <nav class="flex justify-center mb-8 bg-white p-2 rounded-lg shadow-sm">
+            <button id="btn-learn" class="tab-button active flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Aprender</button>
+            <button id="btn-practice" class="tab-button flex-1 sm:flex-none text-center py-2 px-6 font-semibold rounded-md transition-colors duration-300">Praticar</button>
         </nav>
-        <div id="cart-icon" onclick="toggleCartModal()">
-            <i class="fas fa-shopping-cart"></i>
-            <span id="cart-count">0</span>
-        </div>
-    </header>
 
-    <div class="container">
-        <h1 class="section-title">JOGOS EM DESTAQUE</h1>
-        <div id="carousel-outer">
-            <div id="carousel-container">
-                <div class="carousel-slide" id="carousel-slide"></div>
-                <div class="carousel-controls">
-                    <button id="prev-slide" aria-label="Anterior" class="carousel-arrow"><i class="fa fa-chevron-left"></i></button>
-                    <div id="carousel-dots"></div>
-                    <button id="next-slide" aria-label="Próximo" class="carousel-arrow"><i class="fa fa-chevron-right"></i></button>
-                </div>
-            </div>
-        </div>
+        <main>
+            <section id="learn-section">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-4 text-sky-700">O que são Vozes Verbais?</h2>
+                    <p class="mb-6">As vozes verbais indicam a relação entre o sujeito da oração e a ação expressa pelo verbo. Elas mostram se o sujeito pratica, recebe, ou pratica e recebe a ação ao mesmo tempo. Clique nos tópicos abaixo para expandir e ver os detalhes de cada voz.</p>
+                    
+                    <div id="accordion-container" class="space-y-3">
+                    </div>
 
-        <h1 class="section-title">CONSOLES EM DESTAQUE</h1>
-        <div class="consoles-grid">
-            <div class="console-card">
-                <div class="console-badge">Exclusivo</div>
-                <img src="./images/ps5.jpg" alt="PlayStation 5">
-                <div class="console-info">
-                    <h2>PlayStation 5</h2>
-                    <p>Console PlayStation 5 Edição Digital - 825GB SSD</p>
-                    <p class="price">R$4.299,90 <span class="old-price">R$4.999,90</span></p>
+                    <div class="mt-6 p-4 bg-sky-50 border border-sky-200 rounded-lg">
+                        <h3 class="font-bold text-lg text-sky-800">💡 Dicas para Identificar</h3>
+                        <ul class="list-disc list-inside mt-2 space-y-1 text-slate-700">
+                            <li><strong class="font-semibold">Voz Ativa:</strong> O sujeito faz a ação.</li>
+                            <li><strong class="font-semibold">Voz Passiva Analítica:</strong> Verbo "ser/estar/ficar" + particípio. O sujeito recebe a ação.</li>
+                            <li><strong class="font-semibold">Voz Passiva Sintética:</strong> Verbo + "se". Tente converter para a analítica para confirmar.</li>
+                            <li><strong class="font-semibold">Voz Reflexiva:</strong> A ação volta para o próprio sujeito que a pratica.</li>
+                            <li><strong class="font-semibold">Voz Recíproca:</strong> Ação trocada entre os elementos de um sujeito plural.</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="botao-container">
-                    <label>
-                        <input type="checkbox" class="toggle" data-title="PlayStation 5 Digital" data-price="4299.90"/>
-                        <span class="botao"></span>
-                    </label>
-                </div>
-            </div>
-            <div class="console-card">
-                <div class="console-badge">Melhor Custo</div>
-                <img src="./images/xboxs.png" alt="Xbox Series S">
-                <div class="console-info">
-                    <h2>Xbox Series S</h2>
-                    <p>Console Xbox Series S - 512GB SSD</p>
-                    <p class="price">R$2.299,90 <span class="old-price">R$2.799,90</span></p>
-                </div>
-                <div class="botao-container">
-                    <label>
-                        <input type="checkbox" class="toggle" data-title="Xbox Series S" data-price="2299.90"/>
-                        <span class="botao"></span>
-                    </label>
-                </div>
-            </div>
-            <div class="console-card">
-                <div class="console-badge">Lançamento</div>
-                <img src="./images/nitendooled.jpg" alt="Nintendo Switch OLED">
-                <div class="console-info">
-                    <h2>Nintendo Switch OLED</h2>
-                    <p>Console Nintendo Switch Modelo OLED - 64GB</p>
-                    <p class="price">R$2.499,90 <span class="old-price">R$2.999,90</span></p>
-                </div>
-                <div class="botao-container">
-                    <label>
-                        <input type="checkbox" class="toggle" data-title="Nintendo Switch OLED" data-price="2499.90"/>
-                        <span class="botao"></span>
-                    </label>
-                </div>
-            </div>
-        </div>
+            </section>
 
-        <h1 class="section-title">ACESSÓRIOS EM DESTAQUE</h1>
-        <div class="accessories-grid">
-            <div class="accessory-card">
-                <div class="accessory-badge">PlayStation</div>
-                <img src="./images/headset-ps5.png" alt="Headset PULSE 3D PS5">
-                <div class="accessory-info">
-                    <h2>Headset PULSE 3D PS5</h2>
-                    <p>Headset sem fio com áudio 3D para PlayStation 5</p>
-                    <p class="price">R$649,90 <span class="old-price">R$799,90</span></p>
+            <section id="practice-section" class="hidden">
+                 <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-2xl font-bold mb-2 text-sky-700">Teste seus Conhecimentos</h2>
+                    <p class="mb-6">Leia cada frase e classifique a voz verbal. Você receberá feedback imediato para cada resposta. Boa sorte!</p>
+
+                    <div id="quiz-container">
+                        <p id="question-progress" class="text-center font-semibold text-slate-600 mb-4"></p>
+                        <div class="bg-stone-50 p-6 rounded-lg border border-stone-200 text-center">
+                            <p id="question-text" class="text-xl italic"></p>
+                        </div>
+                        <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+                        </div>
+                        <div id="feedback-container" class="mt-4 p-4 rounded-lg text-center hidden">
+                            <p id="feedback-text" class="font-semibold"></p>
+                            <p id="feedback-explanation" class="text-sm mt-1"></p>
+                        </div>
+                        <div class="text-center mt-6">
+                            <button id="next-question-btn" class="hidden py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Próxima</button>
+                        </div>
+                    </div>
+                    
+                    <div id="score-container" class="hidden text-center py-8">
+                        <h3 class="text-2xl font-bold text-sky-800">Quiz Finalizado!</h3>
+                        <p id="score-text" class="text-lg mt-2"></p>
+                        <div id="score-visual" class="w-full bg-stone-200 rounded-full h-4 my-4 overflow-hidden">
+                            <div id="score-bar" class="bg-emerald-500 h-4 rounded-full transition-all duration-500"></div>
+                        </div>
+                        <button id="restart-quiz-btn" class="mt-6 py-2 px-8 bg-sky-600 text-white font-semibold rounded-lg shadow-md hover:bg-sky-700 transition-colors">Tentar Novamente</button>
+                    </div>
                 </div>
-                <div class="botao-container">
-                    <label>
-                        <input type="checkbox" class="toggle" data-title="Headset PULSE 3D PS5" data-price="649.90"/>
-                        <span class="botao"></span>
-                    </label>
-                </div>
-            </div>
-            <div class="accessory-card">
-                <div class="accessory-badge">Xbox</div>
-                <img src="./images/controlex.jpg" alt="Controle Xbox Series X">
-                <div class="accessory-info">
-                    <h2>Controle Xbox Series X</h2>
-                    <p>Controle sem fio para Xbox Series X/S - Preto</p>
-                    <p class="price">R$409,00 <span class="old-price">R$459,00</span></p>
-                </div>
-                <div class="botao-container">
-                    <label>
-                        <input type="checkbox" class="toggle" data-title="Controle Xbox Series X" data-price="409.00"/>
-                        <span class="botao"></span>
-                    </label>
-                </div>
-            </div>
-            <div class="accessory-card">
-                <div class="accessory-badge">Nintendo</div>
-                <img src="./images/controle-nitendo.png" alt="Controle Joy-Con Nintendo">
-                <div class="accessory-info">
-                    <h2>Controle Joy-Con Nintendo</h2>
-                    <p>Controles Joy-Con para Nintendo Switch - Cores Sortidas</p>
-                    <p class="price">R$449,99 <span class="old-price">R$529,99</span></p>
-                </div>
-                <div class="botao-container">
-                    <label>
-                        <input type="checkbox" class="toggle" data-title="Controle Joy-Con Nintendo" data-price="449.99"/>
-                        <span class="botao"></span>
-                    </label>
-                </div>
-            </div>
-        </div>
+            </section>
+        </main>
     </div>
 
-    <div id="cart-modal">
-        <div>
-            <h2 style="color: var(--neon-green); text-align: center; margin-bottom: 20px;">SEU CARRINHO</h2>
-            <ul id="cart-items"></ul>
-            <div class="cart-total" id="cart-total">Total: R$0,00</div>
-            <div class="cart-buttons">
-                <button class="close-cart" onclick="toggleCartModal()">Continuar Comprando</button>
-                <button class="checkout">Finalizar Compra</button>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Sobre Nós</h3>
-                <p>A FATALITY SHOP é a loja definitiva para gamers hardcore. Oferecemos os melhores jogos, consoles e acessórios.</p>
-                <p>Fortaleza - CE, Brasil</p>
-            </div>
-            <div class="footer-section">
-                <h3>Links Rápidos</h3>
-                <p><a href="./index.html">Início</a></p>
-                <p><a href="./indexnintendo.html">Nintendo</a></p>
-                <p><a href="./indexXbox.html">Xbox</a></p>
-                <p><a href="./indexplaystation.html">PlayStation</a></p>
-                <p><a href="./console.html">Consoles</a></p>
-                <p><a href="./acessorios.html">Acessórios</a></p>
-                <p><a href="./indexsuporte.html">Suporte</a></p>
-            </div>
-            <div class="footer-section">
-                <h3>Redes Sociais</h3>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-discord"></i></a>
-                </div>
-                <p style="margin-top: 15px;">contato@fatalityshop.com.br</p>
-            </div>
-        </div>
-        <div class="copyright">
-            &copy; 2025 FATALITY SHOP. Todos os direitos reservados. | Desenvolvido por Eduardo
-        </div>
-    </footer>
-         
     <script>
-        const featuredGames = [
-            {
-                img: "https://image.api.playstation.com/vulcan/ap/rnd/202311/1717/50816ed9cb59ebc484b9d6c9b19b34a953b6ce384ea2dbad.png",
-                title: "The Last of Us II",
-                price: 168.90,
-                oldPrice: 190.90
-            },
-            {
-                img: "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F03c433b0-f112-4978-93a4-f939bdf8f548_1920x1080.jpeg",
-                title: "Call of Duty Black Ops 6",
-                price: 199.99,
-                oldPrice: 279.99
-            },
-            {
-                img: "https://cdn1.epicgames.com/spt-assets/edaff839f0734d16bc89d2ddb1dc9339/steel-magnolia-15owu.jpg",
-                title: "God of War Ragnarok",
-                price: 279.90,
-                oldPrice: 349.99
-            },
-            {
-                img: "https://i.ytimg.com/vi/pBM2xyco_Kg/maxresdefault.jpg",
-                title: "FIFA 25",
-                price: 99.89,
-                oldPrice: 299.00
-            },
-            {
-                img: "https://image.api.playstation.com/vulcan/ap/rnd/202407/0207/5a52ade92affafa4c4353c97110026811a365b65d6bad64e.jpg",
-                title: "Palworld",
-                price: 99.66,
-                oldPrice: 149.99
-            },
-            {
-                img: "https://s2-techtudo.glbimg.com/Dx-d7zd6abaVIdY1QqGVKl_QvJ4=/0x0:620x349/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2021/s/i/R6L1HDR3GxheHSo2ECLQ/2013-10-11-grand-theft-auto-5-gta-finais.jpg",
-                title: "Grand Theft Auto V",
-                price: 113.66,
-                oldPrice: 249.99
-            },
-            {
-                img: "https://media.wired.com/photos/633c95ef85e7a4cc2f802256/master/pass/Breath-of-the-Wild-Casual-Gamer-Culture.jpg",
-                title: "The Legend of Zelda Breath of The Wild",
-                price: 299.00,
-                oldPrice: 299.99
-            },
-            {
-                img: "https://store-images.s-microsoft.com/image/apps.396.14277259033847105.7852260c-8a58-4e28-9e97-dd6d1a7f62f9.a4c88625-0802-48a6-86d8-f41f098ab7e0?q=90&w=480&h=270",
-                title: "Dragon's Dogma II",
-                price: 192.03,
-                oldPrice: 289.99
-            }
-        ];
+        document.addEventListener('DOMContentLoaded', () => {
+            const learnSection = document.getElementById('learn-section');
+            const practiceSection = document.getElementById('practice-section');
+            const btnLearn = document.getElementById('btn-learn');
+            const btnPractice = document.getElementById('btn-practice');
 
-        let cartCount = 0;
-        let cartTotal = 0;
-        const cartCountEl = document.getElementById("cart-count");
-        const cartItemsEl = document.getElementById("cart-items");
-        const cartTotalEl = document.getElementById("cart-total");
-        const cartModal = document.getElementById("cart-modal");
-        const carrinho = [];
+            const accordionContainer = document.getElementById('accordion-container');
+            const quizContainer = document.getElementById('quiz-container');
+            const scoreContainer = document.getElementById('score-container');
+            const questionProgress = document.getElementById('question-progress');
+            const questionText = document.getElementById('question-text');
+            const optionsContainer = document.getElementById('options-container');
+            const feedbackContainer = document.getElementById('feedback-container');
+            const feedbackText = document.getElementById('feedback-text');
+            const feedbackExplanation = document.getElementById('feedback-explanation');
+            const nextQuestionBtn = document.getElementById('next-question-btn');
+            const restartQuizBtn = document.getElementById('restart-quiz-btn');
+            const scoreText = document.getElementById('score-text');
+            const scoreBar = document.getElementById('score-bar');
 
-        let currentSlide = 0;
-        let carouselInterval;
+            const learnData = [
+                {
+                    title: '1. Voz Ativa',
+                    content: 'Na voz ativa, o sujeito é o <strong>agente</strong> da ação verbal, ou seja, é ele quem pratica a ação.<br><br><strong>Estrutura comum:</strong> Sujeito Agente + Verbo + Complemento<br><strong>Exemplo:</strong> <em>O menino</em> quebrou o vaso.'
+                },
+                {
+                    title: '2. Voz Passiva',
+                    content: 'Na voz passiva, o sujeito é o <strong>paciente</strong> da ação verbal, ou seja, ele recebe ou sofre a ação. O agente da ação, se expresso, é introduzido geralmente pelas preposições "por" ou "de".'
+                },
+                {
+                    title: '2a. Voz Passiva Analítica',
+                    content: 'É formada por um verbo auxiliar (geralmente <strong>ser</strong>) seguido do particípio do verbo principal.<br><br><strong>Estrutura comum:</strong> Sujeito Paciente + Verbo Auxiliar + Particípio<br><strong>Exemplo:</strong> <em>O vaso</em> foi quebrado pelo menino.'
+                },
+                {
+                    title: '2b. Voz Passiva Sintética (ou Pronominal)',
+                    content: 'É formada por um verbo na 3ª pessoa, seguido do pronome apassivador <strong>"se"</strong>.<br><br><strong>Estrutura comum:</strong> Verbo (3ª pessoa) + "se" + Sujeito Paciente<br><strong>Exemplo:</strong> Quebrou-<em>se</em> o vaso. (Equivale a: O vaso foi quebrado)'
+                },
+                {
+                    title: '3. Voz Reflexiva',
+                    content: 'Na voz reflexiva, o sujeito é ao mesmo tempo <strong>agente e paciente</strong>. Ele pratica a ação sobre si mesmo, usando pronomes como me, te, se, nos, vos.<br><br><strong>Estrutura comum:</strong> Sujeito + Verbo + Pronome Reflexivo<br><strong>Exemplo:</strong> <em>O menino</em> feriu-<em>se</em>.'
+                },
+                {
+                    title: '4. Voz Recíproca',
+                    content: 'É uma subdivisão da voz reflexiva. Ocorre quando a ação é mútua ou trocada entre os elementos de um sujeito plural.<br><br><strong>Estrutura comum:</strong> Sujeito (plural) + Verbo + Pronome Recíproco<br><strong>Exemplo:</strong> <em>Os lutadores</em> agrediram-<em>se</em>.'
+                },
+            ];
 
-        function renderCarousel() {
-            const slide = document.getElementById('carousel-slide');
-            const dots = document.getElementById('carousel-dots');
-            slide.innerHTML = '';
-            dots.innerHTML = '';
+            const quizData = [
+                { question: "O vento forte derrubou a árvore antiga.", answer: "Voz Ativa", explanation: "O sujeito 'O vento forte' praticou a ação de derrubar." },
+                { question: "Venderam-se todas as casas do condomínio.", answer: "Voz Passiva Sintética", explanation: "Equivale a 'Todas as casas do condomínio foram vendidas'." },
+                { question: "A proposta foi aceita por todos os diretores.", answer: "Voz Passiva Analítica", explanation: "O sujeito 'A proposta' sofreu a ação de ser aceita." },
+                { question: "O atleta machucou-se durante o treino.", answer: "Voz Reflexiva", explanation: "O atleta machucou a si mesmo." },
+                { question: "Os noivos se beijaram apaixonadamente.", answer: "Voz Recíproca", explanation: "A ação de beijar foi mútua entre os noivos." },
+                { question: "Nós construímos um futuro melhor.", answer: "Voz Ativa", explanation: "O sujeito 'Nós' praticou a ação de construir." },
+                { question: "Precisa-se de voluntários para o evento.", answer: "Voz Ativa", explanation: "Atenção! O 'se' é índice de indeterminação do sujeito, pois o verbo é transitivo indireto. O sujeito que pratica a ação é indeterminado." },
+                { question: "A criança se vestiu sozinha para a festa.", answer: "Voz Reflexiva", explanation: "A criança vestiu a si mesma." },
+                { question: "As cartas foram entregues pelo carteiro esta manhã.", answer: "Voz Passiva Analítica", explanation: "O sujeito 'As cartas' sofreu a ação de ser entregue." },
+                { question: "Os jogadores se cumprimentaram antes da partida.", answer: "Voz Recíproca", explanation: "A ação de cumprimentar foi trocada entre os jogadores." },
+                { question: "Alguém esqueceu este guarda-chuva aqui.", answer: "Voz Ativa", explanation: "O sujeito 'Alguém' praticou a ação de esquecer." },
+                { question: "As regras do jogo foram explicadas claramente.", answer: "Voz Passiva Analítica", explanation: "O sujeito 'As regras do jogo' sofreu a ação de ser explicado." },
+                { question: "O gato se escondeu debaixo da cama.", answer: "Voz Reflexiva", explanation: "O gato escondeu a si mesmo." },
+                { question: "Consertam-se relógios nesta loja.", answer: "Voz Passiva Sintética", explanation: "Equivale a 'Relógios são consertados nesta loja'." },
+                { question: "Eles se amam verdadeiramente.", answer: "Voz Recíproca", explanation: "A ação de amar é mútua entre eles." }
+            ];
+            
+            const allOptions = ["Voz Ativa", "Voz Passiva Analítica", "Voz Passiva Sintética", "Voz Reflexiva", "Voz Recíproca"];
+            let currentQuestionIndex = 0;
+            let score = 0;
+            let shuffledQuizData = [];
 
-            const game = featuredGames[currentSlide];
-            const isChecked = carrinho.some(item => item.title === game.title);
-
-            // Estrutura do card do carrossel
-            const card = document.createElement('div');
-            card.style.display = 'flex';
-            card.style.background = '#181818';
-            card.style.borderRadius = '18px';
-            card.style.overflow = 'hidden';
-            card.style.boxShadow = '0 6px 32px 0 rgba(0,0,0,0.6)';
-            card.style.alignItems = 'stretch';
-            card.style.margin = '0 auto';
-            card.style.maxWidth = '1100px';
-            card.style.minHeight = '340px';
-
-            // Imagem à esquerda
-            const imgDiv = document.createElement('div');
-            imgDiv.style.flex = '1.2';
-            imgDiv.style.background = '#111';
-            imgDiv.style.display = 'flex';
-            imgDiv.style.alignItems = 'center';
-            imgDiv.style.justifyContent = 'center';
-            imgDiv.style.padding = '28px 0 28px 28px';
-
-            const img = document.createElement('img');
-            img.src = game.img;
-            img.alt = game.title;
-            img.style.width = '100%';
-            img.style.maxWidth = '420px';
-            img.style.height = '280px';
-            img.style.objectFit = 'cover';
-            img.style.borderRadius = '16px';
-            imgDiv.appendChild(img);
-
-            // Info à direita
-            const infoDiv = document.createElement('div');
-            infoDiv.style.flex = '2';
-            infoDiv.style.display = 'flex';
-            infoDiv.style.flexDirection = 'column';
-            infoDiv.style.justifyContent = 'center';
-            infoDiv.style.padding = '38px 42px 38px 38px';
-
-            // Título
-            const title = document.createElement('h2');
-            title.textContent = game.title;
-            title.style.fontSize = '2.2em';
-            title.style.fontWeight = 'bold';
-            title.style.marginBottom = '18px';
-            title.style.color = '#fff';
-
-            // Descrição
-            const desc = document.createElement('p');
-            desc.textContent = getGameDescription(game.title);
-            desc.style.color = '#ccc';
-            desc.style.fontSize = '1.15em';
-            desc.style.marginBottom = '22px';
-
-            // Preço
-            const price = document.createElement('div');
-            price.innerHTML = `R$ <span style="color:var(--neon-green);font-size:1.7em;font-weight:bold;">${game.price.toFixed(2).replace('.', ',')}</span>
-                <span style="color:#888;text-decoration:line-through;font-size:1em;margin-left:10px;">R$${game.oldPrice.toFixed(2).replace('.', ',')}</span>`;
-            price.style.marginBottom = '18px';
-            price.style.fontSize = '1.2em';
-
-            // Botão de adicionar/remover
-            const label = document.createElement('label');
-            label.style.display = 'inline-block';
-            label.style.marginTop = '10px';
-
-            const checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            checkbox.className = 'toggle';
-            checkbox.setAttribute('data-title', game.title);
-            checkbox.setAttribute('data-price', game.price);
-            if (isChecked) checkbox.checked = true;
-
-            const botao = document.createElement('span');
-            botao.className = 'botao';
-
-            label.appendChild(checkbox);
-            label.appendChild(botao);
-
-            infoDiv.appendChild(title);
-            infoDiv.appendChild(desc);
-            infoDiv.appendChild(price);
-            infoDiv.appendChild(label);
-
-            card.appendChild(imgDiv);
-            card.appendChild(infoDiv);
-            slide.appendChild(card);
-
-            // Evento do botão
-            checkbox.addEventListener('change', function() {
-                const gameTitle = this.getAttribute('data-title');
-                const gamePrice = parseFloat(this.getAttribute('data-price'));
-                if (this.checked) {
-                    playSoundEffect('add');
-                    carrinho.push({ title: gameTitle, price: gamePrice, quantity: 1 });
-                    cartCount++;
-                    cartTotal += gamePrice;
+            function switchView(view) {
+                if (view === 'learn') {
+                    learnSection.classList.remove('hidden');
+                    practiceSection.classList.add('hidden');
+                    btnLearn.classList.add('active');
+                    btnPractice.classList.remove('active');
                 } else {
-                    const idx = carrinho.findIndex(item => item.title === gameTitle);
-                    if (idx !== -1) {
-                        cartTotal -= carrinho[idx].price * carrinho[idx].quantity;
-                        carrinho.splice(idx, 1);
-                        cartCount--;
-                    }
+                    learnSection.classList.add('hidden');
+                    practiceSection.classList.remove('hidden');
+                    btnLearn.classList.remove('active');
+                    btnPractice.classList.add('active');
+                    startQuiz();
                 }
-                updateCartDisplay();
-            });
-
-            // Dots do carrossel
-            featuredGames.forEach((_, idx) => {
-                const dot = document.createElement('button');
-                dot.className = 'carousel-dot' + (idx === currentSlide ? ' active' : '');
-                dot.style.width = '14px';
-                dot.style.height = '14px';
-                dot.style.borderRadius = '50%';
-                dot.style.margin = '0 5px';
-                dot.style.border = 'none';
-                dot.style.background = idx === currentSlide ? 'var(--blood-red)' : '#444';
-                dot.style.cursor = 'pointer';
-                dot.onclick = () => { goToSlide(idx); };
-                dots.appendChild(dot);
-            });
-        }
-
-        function getGameDescription(title) {
-            switch (title) {
-                case "The Last of Us II":
-                    return "Vivencie uma jornada intensa de sobrevivência e emoção em um mundo pós-apocalíptico.";
-                case "Call of Duty Black Ops 6":
-                    return "Ação frenética e multiplayer de última geração na franquia de tiro mais famosa do mundo.";
-                case "God of War Ragnarok":
-                    return "Acompanhe Kratos e Atreus em uma aventura épica pelos mitos nórdicos.";
-                case "FIFA 25":
-                    return "O futebol mais realista e emocionante, com gráficos e jogabilidade aprimorados.";
-                case "Palworld":
-                    return "Explore, capture criaturas e construa seu mundo em uma aventura cheia de possibilidades.";
-                case "Grand Theft Auto V":
-                    return "Viva o crime e a ação em Los Santos, no maior clássico de mundo aberto.";
-                case "The Legend of Zelda Breath of The Wild":
-                    return "Jogue o mundo aberto juntamente com Link no complexo e rico universo de The Legend of Zelda, uma das franquias de destaques da Nintendo.";
-                case "Dragon's Dogma II":
-                    return "Aventure-se em batalhas épicas e um mundo de fantasia cheio de perigos e descobertas.";
-                default:
-                    return "";
             }
-        }
 
-        function goToSlide(idx) {
-            currentSlide = idx;
-            renderCarousel();
-            resetCarouselInterval();
-        }
+            btnLearn.addEventListener('click', () => switchView('learn'));
+            btnPractice.addEventListener('click', () => switchView('practice'));
 
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % featuredGames.length;
-            renderCarousel();
-            resetCarouselInterval();
-        }
-
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + featuredGames.length) % featuredGames.length;
-            renderCarousel();
-            resetCarouselInterval();
-        }
-
-        function resetCarouselInterval() {
-            clearInterval(carouselInterval);
-            carouselInterval = setInterval(nextSlide, 5000);
-        }
-
-        function updateCartDisplay() {
-            cartCountEl.textContent = cartCount;
-            cartTotalEl.textContent = `Total: R$${cartTotal.toFixed(2).replace('.', ',')}`;
-            if (cartModal.style.display === "flex") {
-                renderCartItems();
-            }
-        }
-
-        function renderCartItems() {
-            cartItemsEl.innerHTML = "";
-            if (carrinho.length === 0) {
-                cartItemsEl.innerHTML = "<li style='text-align:center; padding:20px;'>Seu carrinho está vazio.</li>";
-            } else {
-                carrinho.forEach(item => {
-                    const li = document.createElement('li');
-                    li.innerHTML = `
-                        <div style="flex:1;">${item.title}</div>
-                        <div style="width:100px; text-align:right;">
-                            R$${item.price.toFixed(2).replace('.', ',')}
-                        </div>
-                        <div style="width:80px; display:flex; align-items:center; justify-content:space-between;">
-                            <button onclick="changeQuantity('${item.title}', -1)" style="background:none; border:none; color:white; cursor:pointer; font-size:1.2em;">-</button>
-                            <span>${item.quantity}</span>
-                            <button onclick="changeQuantity('${item.title}', 1)" style="background:none; border:none; color:white; cursor:pointer; font-size:1.2em;">+</button>
-                        </div>
-                        <button onclick="removeItem('${item.title}')" style="background:none; border:none; color:var(--blood-red); cursor:pointer; margin-left:10px;">
-                            <i class="fas fa-trash"></i>
+            function createAccordion() {
+                accordionContainer.innerHTML = '';
+                learnData.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'border border-stone-200 rounded-lg';
+                    div.innerHTML = `
+                        <button class="accordion-button w-full p-4 text-left font-semibold text-lg flex justify-between items-center hover:bg-stone-50 transition-colors">
+                            <span>${item.title}</span>
+                            <span class="transform transition-transform duration-300">&#9662;</span>
                         </button>
+                        <div class="accordion-content">
+                            <div class="p-4 border-t border-stone-200 text-slate-700">
+                                <p>${item.content}</p>
+                            </div>
+                        </div>
                     `;
-                    li.style.display = 'flex';
-                    li.style.alignItems = 'center';
-                    li.style.gap = '15px';
-                    cartItemsEl.appendChild(li);
+                    accordionContainer.appendChild(div);
+                });
+
+                document.querySelectorAll('.accordion-button').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const icon = button.querySelector('span:last-child');
+                        const isOpen = button.classList.toggle('open');
+                        icon.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+                    });
                 });
             }
-        }
 
-        function changeQuantity(title, change) {
-            const item = carrinho.find(i => i.title === title);
-            if (item) {
-                const newQuantity = item.quantity + change;
-                if (newQuantity > 0) {
-                    cartTotal += item.price * change;
-                    item.quantity = newQuantity;
+            function startQuiz() {
+                currentQuestionIndex = 0;
+                score = 0;
+                shuffledQuizData = [...quizData].sort(() => Math.random() - 0.5);
+                quizContainer.classList.remove('hidden');
+                scoreContainer.classList.add('hidden');
+                showQuestion();
+            }
+
+            function showQuestion() {
+                feedbackContainer.classList.add('hidden');
+                nextQuestionBtn.classList.add('hidden');
+
+                const question = shuffledQuizData[currentQuestionIndex];
+                questionProgress.textContent = `Questão ${currentQuestionIndex + 1} de ${shuffledQuizData.length}`;
+                questionText.textContent = question.question;
+                
+                optionsContainer.innerHTML = '';
+                allOptions.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.className = "quiz-option w-full p-3 border-2 border-stone-300 rounded-lg hover:bg-stone-200 transition-colors";
+                    button.addEventListener('click', () => selectAnswer(option, question.answer, question.explanation));
+                    optionsContainer.appendChild(button);
+                });
+            }
+
+            function selectAnswer(selectedOption, correctAnswer, explanation) {
+                const buttons = optionsContainer.querySelectorAll('button');
+                let isCorrect = selectedOption === correctAnswer;
+
+                if (isCorrect) {
+                    score++;
+                    feedbackText.textContent = '🎉 Correto!';
+                    feedbackContainer.className = 'mt-4 p-4 rounded-lg text-center bg-emerald-100 border border-emerald-200 text-emerald-800';
                 } else {
-                    removeItem(title);
+                    feedbackText.textContent = '🤔 Incorreto!';
+                    feedbackContainer.className = 'mt-4 p-4 rounded-lg text-center bg-red-100 border border-red-200 text-red-800';
                 }
-                updateCartDisplay();
-                playSoundEffect('click');
-            }
-        }
 
-        function removeItem(title) {
-            const idx = carrinho.findIndex(item => item.title === title);
-            if (idx !== -1) {
-                cartTotal -= carrinho[idx].price * carrinho[idx].quantity;
-                carrinho.splice(idx, 1);
-                cartCount--;
-                if (featuredGames[currentSlide].title === title) {
-                    renderCarousel();
+                feedbackExplanation.innerHTML = `<strong>Resposta:</strong> ${explanation}`;
+                feedbackContainer.classList.remove('hidden');
+
+                buttons.forEach(button => {
+                    button.disabled = true;
+                    if (button.textContent === correctAnswer) {
+                        button.classList.add('correct-answer');
+                    } else if (button.textContent === selectedOption && !isCorrect) {
+                        button.classList.add('wrong-answer');
+                    }
+                });
+
+                nextQuestionBtn.classList.remove('hidden');
+            }
+            
+            function showScore() {
+                quizContainer.classList.add('hidden');
+                scoreContainer.classList.remove('hidden');
+                scoreText.textContent = `Você acertou ${score} de ${shuffledQuizData.length} questões.`;
+                const percentage = (score / shuffledQuizData.length) * 100;
+                scoreBar.style.width = `${percentage}%`;
+            }
+
+            nextQuestionBtn.addEventListener('click', () => {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < shuffledQuizData.length) {
+                    showQuestion();
+                } else {
+                    showScore();
                 }
-                updateCartDisplay();
-                playSoundEffect('remove');
-            }
-        }
+            });
+            
+            restartQuizBtn.addEventListener('click', startQuiz);
 
-        function toggleCartModal() {
-            if (cartModal.style.display === "flex") {
-                cartModal.style.display = "none";
-                playSoundEffect('close');
-            } else {
-                renderCartItems();
-                cartModal.style.display = "flex";
-                playSoundEffect('open');
-            }
-        }
-
-        function playSoundEffect(type) {
-            // Simulação de efeito sonoro
-            // console.log(`Playing ${type} sound effect`);
-        }
-
-        cartModal.addEventListener('click', function(e) {
-            if (e.target === cartModal) {
-                toggleCartModal();
-            }
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            renderCarousel();
-            document.getElementById('next-slide').onclick = nextSlide;
-            document.getElementById('prev-slide').onclick = prevSlide;
-            carouselInterval = setInterval(nextSlide, 5000);
-        });
-
-        document.querySelector('.checkout').addEventListener('click', function() {
-            if (carrinho.length > 0) {
-                alert('Compra finalizada! Obrigado por escolher a FATALITY SHOP!');
-                carrinho.length = 0;
-                cartCount = 0;
-                cartTotal = 0;
-                updateCartDisplay();
-                toggleCartModal();
-                renderCarousel();
-            } else {
-                alert('Seu carrinho está vazio!');
-            }
+            createAccordion();
         });
     </script>
 </body>
